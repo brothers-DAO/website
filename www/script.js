@@ -1,31 +1,24 @@
-        
+const menuBtn = document.getElementById("menuBtn");
+const menuOverlay = document.getElementById("menuOverlay");
+const menuBackdrop = document.getElementById("menuBackdrop");
 
-       $(document).ready(function () {
-        // Show hide popover
-        $(".dropdown").click(function () {
-            $(this).find(".dropdown-menu").slideToggle("fast");
-        });
-    });
+function toggleMenu() {
+  menuOverlay.classList.toggle("open");
+  menuBackdrop.classList.toggle("show");
+  menuBtn.textContent = menuOverlay.classList.contains("open") ? "✖" : "☰";
+}
 
-        $(document).on("click", function (event) {
-        var $trigger = $(".dropdown");
-        if ($trigger !== event.target && !$trigger.has(event.target).length) {
-            $(".dropdown-menu").slideUp("fast");
-        }
-    });
-      
-      
-      /*   const toggleBtn = document.querySelector('.toggle_btn')
-        const toggleBtnIcon = document.querySelector('.toggle_btn i')
-        const dropDownMenu = document.querySelector('.dropdown_menu')
+menuBtn.addEventListener("click", (e) => {
+  e.stopPropagation();
+  toggleMenu();
+});
 
-        toggleBtn.onclick = function () {
-            dropDownMenu.classList.toggle('open')
-            const isOpen = dropDownMenu.classList.contains('open')
+menuBackdrop.addEventListener("click", () => {
+  toggleMenu();
+});
 
-            toggleBtnIcon.classList = isOpen
-                ? 'fa-solid fa-xmark'
-                : 'fa-solid fa-bars'
-
-        } */
-
+document.addEventListener("keydown", (e) => {
+  if (e.key === "Escape" && menuOverlay.classList.contains("open")) {
+    toggleMenu();
+  }
+});

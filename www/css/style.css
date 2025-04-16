@@ -30,73 +30,108 @@ body {
 /* || HEADER & DROPDOW MENU */
 header {
   top: 0;
-  background-color: #0f1b1a;
+  background-color: hsl(175, 29%, 8%);
   position: sticky;
   padding: 0.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
+  width: 100%;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 1), 0 6px 20px 0; 
+  z-index: 1000;
 }
 
 .logo a {
-  color: rgba(245, 245, 245, 0.904);
+  color: rgba(245, 245, 245, 0.85);
   font-size: 1.6rem;
   font-weight: bold;
   padding: 0.2rem;
   text-decoration: none;
 }
 
-ul {
-  padding: 0;
-  list-style: none;
-}
+/* || SLIDE-IN BURGUER MENU */
 
-ul li a {
+/* Menu Button */
+.menu-button {
+  top: 20px;
+  left: 20px;
+  z-index: 1001;
+  background: none;
+  border: none;
   font-size: 2.5rem;
-  text-decoration: none;
-  color: rgba(245, 245, 245, 0.904);  
+  cursor: pointer;
+  color: rgba(245, 245, 245, 0.85);
+  transition: color 0.3s;
 }
 
-ul li ul li a {
-  font-size: 1.5rem;
-  text-decoration: none;
-  text-transform: uppercase;
-  color: rgba(245, 245, 245, 0.904);
-  font-weight: bold;
-  display: flex;
-}
-
-ul li a:link { 
-  text-decoration: none; 
-} 
-
-ul li a:visited { 
-  text-decoration: none; 
-} 
-
-ul li a:hover {
+.menu-button:hover {
   color: orange;
 }
 
-ul li ul.dropdown-menu {
-  display: none;
-  /* Set width of the dropdown */
-  height: 260px;
-  width: 180px;
-  /* Set width of the dropdown */
+/* Overlay Menu with Glass Effect */
+.menu-overlay {
+  position: fixed;
+  top: 0;
+  left: -100%;
+  width: 60%;
+  max-width: 320px;
+  height: 100%;
+  background: rgba(118, 115, 115, 0.1); 
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+  box-shadow: 2px 0 20px rgba(0,0,0,0.2);
+  transition: left 0.4s ease;
+  z-index: 1000;
+  display: flex;
+  flex-direction: column;
+  padding: 60px 30px 20px;
+  overflow-y: auto;
+}
+
+.menu-overlay.open {
+  left: 0;
+}
+
+.menu-overlay a {
+  text-decoration: none;
   color: rgba(245, 245, 245, 0.904);
-  backdrop-filter: blur(20px);
-  position: absolute;
-  border-radius: 10px;
-  top: 95px;
+  font-size: 20px;
+  margin: 20px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  transition: color 0.2s;
 }
 
-ul li ul.dropdown-menu li {
-  margin: 0.1rem;
-  padding: 0.7rem;
-  display: block;
+.menu-overlay a:last-child {
+  border-bottom: none;
 }
 
+.menu-overlay a:first-child {
+margin-top: 80px;
+}
+
+.menu-overlay a:hover {
+  color: orange;
+}
+
+/* Dark background when menu open */
+.menu-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.4);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.4s;
+  z-index: 999;
+}
+
+.menu-backdrop.show {
+  opacity: 1;
+  visibility: visible;
+}
 
 /* || MAIN */
 main {
@@ -163,21 +198,24 @@ main {
 
 /* || FOOTER */
 footer {
+
   bottom: 0;
+  display: flex;
+  justify-content: center;  
+  align-items: center;       
+  gap: 1rem;                 
+  position: relative;
   padding: 0.25rem;
   position: sticky;
   background-color: #0f1b1a;
-  color: rgba(245, 245, 245, 0.904);
+}
+
+.footer-text {
   text-align: center;
+/*   max-width: 300px; */
   font-size: 1rem;
+  color: rgba(245, 245, 245, 0.85);
 }
-
-footer p {
-  color: rgba(245, 245, 245, 0.904);
-  text-align: center;
-  font-size: 0.9rem;
-}
-
 
 /* || ---------- MEDIA */
 
@@ -272,11 +310,7 @@ footer p {
     border-radius: 10px;
     top: 95px;
   }
-
-  ul li ul li a {
-    font-size: 1rem;
-  }
-
+  
   main {
     flex-flow: row nowrap;
     justify-content: space-evenly;
