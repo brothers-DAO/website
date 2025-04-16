@@ -92,6 +92,10 @@ header {
   left: 0;
 }
 
+.menu-overlay a i {
+  margin-right: 8px;
+}
+
 .menu-overlay a {
   text-decoration: none;
   color: rgba(245, 245, 245, 0.904);

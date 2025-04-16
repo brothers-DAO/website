@@ -1,11 +1,20 @@
 const menuBtn = document.getElementById("menuBtn");
+const menuIcon = document.getElementById("menuIcon");
 const menuOverlay = document.getElementById("menuOverlay");
 const menuBackdrop = document.getElementById("menuBackdrop");
 
 function toggleMenu() {
-  menuOverlay.classList.toggle("open");
+  const isOpen = menuOverlay.classList.toggle("open");
   menuBackdrop.classList.toggle("show");
-  menuBtn.textContent = menuOverlay.classList.contains("open") ? "✖" : "☰";
+
+  // Toggle between hamburger and X
+  if (isOpen) {
+    menuIcon.classList.remove("fa-bars");
+    menuIcon.classList.add("fa-times");
+  } else {
+    menuIcon.classList.remove("fa-times");
+    menuIcon.classList.add("fa-bars");
+  }
 }
 
 menuBtn.addEventListener("click", (e) => {
